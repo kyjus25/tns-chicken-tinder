@@ -1,0 +1,25 @@
+<GridLayout [height]="height" [width]="height" [col]="col" [row]="row"
+    [colSpan]="colSpan" [rowSpan]="rowSpan" verticalAlignment="top">
+    <RadRadialGauge>
+        <RadialScale tkRadialGaugeScales startAngle="-90" sweepAngle="360">
+            <ScaleStyle tkRadialScaleStyle ticksVisible="false" labelsVisible="false"
+                lineThickness="0">
+            </ScaleStyle>
+
+            <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="100">
+                <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#9AA6B3"
+                    cap="Round" barWidth="0.1">
+                </BarIndicatorStyle>
+            </RadialBarIndicator>
+
+            <RadialBarIndicator tkRadialScaleIndicators minimum="0" [maximum]="value"
+                isAnimated="true">
+                <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#FFFFFF"
+                    cap="Round" barWidth="0.1">
+                </BarIndicatorStyle>
+            </RadialBarIndicator>
+        </RadialScale>
+    </RadRadialGauge>
+    <Label [text]="progress + '%'" color="#FFFFFF" [fontSize]="textSize"
+        class="m-x-auto m-y-auto"></Label>
+</GridLayout>

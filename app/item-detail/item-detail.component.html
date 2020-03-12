@@ -1,0 +1,31 @@
+<StackLayout ios:marginBottom="48" class="page">
+    <custom-action-bar [isBack]="true" title="Details"></custom-action-bar>
+    <ScrollView class="page" (scroll)="onScroll($event)">
+        <StackLayout class="p-x-8 p-t-24" paddingBottom="45">
+            <Image class="over" [src]="item.image" width="60%" marginBottom="-60"
+                borderRadius="12" [opacity]="opacity"></Image>
+            <StackLayout class="p-y-24 under p-x-24" backgroundColor="white"
+                borderRadius="8" paddingTop="80">
+                <Label class="h3 title text-center" [text]="item.title"></Label>
+                <Label class="h5 caption text-center" [text]="item.author"></Label>
+                <Label class="hr-light m-y-20" backgroundColor="#E7ECF0"></Label>
+                <Label class="h5 date" verticalAlignment="bottom">
+                    <FormattedString>
+                        <Span class="fa" text="&#xf073;  "></Span>
+                        <Span [text]="item.date"></Span>
+                    </FormattedString>
+                </Label>
+                <Label class="h5 date" verticalAlignment="bottom"
+                    marginBottom="0">
+                    <FormattedString>
+                        <Span class="fa" text="&#xf015;  "></Span>
+                        <Span color="#854CC5" [text]="item.location"></Span>
+                    </FormattedString>
+                </Label>
+                <Label class="hr-light m-y-20" backgroundColor="#E7ECF0"></Label>
+                <Label class="body caption" [text]="item.description"
+                    textWrap="true"></Label>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>

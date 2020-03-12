@@ -1,0 +1,20 @@
+<GridLayout columns="56,*,56" rows="56" [col]="col" [row]="row" [colSpan]="colSpan"
+    class="custom-action-bar">
+    <Image *ngIf="isBack" col="0" row="0" width="24" height="24" class="text-center"
+        src="~/images/arrow_left.png" (tap)="goBack()"></Image>
+    <Label col="1" row="0" class="h2 action-bar-title" [text]="'Chicken Tinder'"
+        verticalAlignment="center"></Label>
+    <ios>
+        <CardView col="2" row="0" rowSpan="2" class="profile-img-container"
+            shadowOffsetHeight="6" shadowOpacity="0.1" shadowColor="#000000"
+            shadowRadius="4">
+            <Image src="~/images/me.png" class="profile-img"></Image>
+        </CardView>
+    </ios>
+    <android>
+        <StackLayout col="2" row="0" rowSpan="2" class="profile-img-container">
+            <Image src="~/images/me.png" class="profile-img"></Image>
+        </StackLayout>
+    </android>
+    <Label col="2" row="0" class="profile-img-badge"></Label>
+</GridLayout>

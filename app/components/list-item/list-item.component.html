@@ -1,0 +1,19 @@
+<GridLayout columns="*,auto" class="p-8 m-b-8 m-x-8" borderRadius="8"
+    backgroundColor="white">
+    <GridLayout col="0" columns="auto,*,auto" rows="auto,auto,auto" (tap)="emitTap()">
+        <Image col="0" rowSpan="3" class="thumbnail m-r-12" stretch="aspectFill"
+            [src]="item.image"></Image>
+        <Label col="1" row="0" class="h3 title m-t-4" marginBottom="0" [text]="item.title"></Label>
+        <Label col="1" row="1" class="h5 caption" [text]="item.author"></Label>
+        <Label col="1" row="2" class="h5 date" marginBottom="4"
+            verticalAlignment="bottom">
+            <FormattedString>
+                <Span class="fa" text="&#xf073;  "></Span>
+                <Span [text]="item.date"></Span>
+            </FormattedString>
+        </Label>
+    </GridLayout>
+    <StackLayout col="1" verticalAlignment="top" (tap)="emitDislike(item)">
+        <Image class="favorite-star" src="~/images/star.png"></Image>
+    </StackLayout>
+</GridLayout>

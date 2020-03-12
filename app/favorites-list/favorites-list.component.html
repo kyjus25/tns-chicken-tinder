@@ -1,0 +1,18 @@
+<GridLayout class="page" rows="auto,auto,*" ios:marginBottom="48">
+    <custom-action-bar [row]="0" title="Favorites"></custom-action-bar>
+    <search [row]="1" (submit)="onSearch($event)" (clear)="onClear()"></search>
+    <ListView *ngIf="filteredItems && filteredItems.length; else noItems" row="2"
+        [items]="filteredItems" marginTop="24" (touch)="dismissKeyboard($event)">
+        <ng-template let-item="item" let-i="index">
+            <list-item [item]="item" (tapped)="onTap(item.id)" (disliked)="onDislike($event)"></list-item>
+        </ng-template>
+    </ListView>
+</GridLayout>
+
+<ng-template #noItems>
+    <StackLayout row="2" verticalAlignment="center">
+        <Image src="~/images/empty.png" class="placeholder-image"></Image>
+        <Label text="No data to display ;(" textWrap="true" class="h4 placeholder-label"></Label>
+    </StackLayout>
+    <!--<Label  class="h2 text-center" text="No data :(" verticalAlignment="center"></Label>-->
+</ng-template>

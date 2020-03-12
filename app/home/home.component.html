@@ -1,0 +1,114 @@
+<GridLayout rows="auto, *" ios:marginBottom="48">
+    <GridLayout row="0" rowSpan="2" paddingTop="56" class="page" (loaded)="onContainerLoaded($event)"
+        width="100%" height="100%">
+        <android>
+            <SwipeLayout *ngFor="let card of cards |  slice:0:5; let i = index; trackBy: trackingFunction"
+                [visibility]="isLoaded ? 'visible' : 'collapse'"
+                [animationState]="swipeLayoutAnimated" [gestureMode]="gestureMode"
+                class="swipe-layout" [class.front]="i == 0" [class.middle]="i == 1"
+                [class.back]="i == 2" [isUserInteractionEnabled]="i == 0"
+                (loaded)="swipeLayoutLoaded($event, btnIgnore, btnLike, badgeLike, badgeIgnore)"
+                (swipeLeft)="swipeLeftCallback($event, card)" (swipeRight)="swipeRightCallback($event, card)">
+                <StackLayout class="main-card dark">
+                    <GridLayout rows="*, auto, *" columns="8, auto, *, auto, 8"
+                        class="main-card-container">
+
+                        <GridLayout #badgeLike col="0" colSpan="5" row="0"
+                            class="btn btn-square card-badge m-l-16"
+                            horizontalAlignment="left" opacity="0">
+                            <Image src="~/images/star.png" class="image"></Image>
+                        </GridLayout>
+                        <GridLayout #badgeIgnore col="0" colSpan="5" row="0"
+                            class="btn btn-square card-badge m-r-16"
+                            horizontalAlignment="right" opacity="0">
+                            <Image src="~/images/cancel.png" class="image"></Image>
+                        </GridLayout>
+
+                        <Image col="0" row="0" colSpan="5" rowSpan="6" [src]="card.image"
+                            stretch="aspectFill" borderRadius="10"></Image>
+
+                        <GridLayout #btnIgnore col="1" row="1" class="btn btn-square"
+                            [isUserInteractionEnabled]="i == 0" (tap)="decline(card)">
+                            <Image src="~/images/cancel.png" class="image"></Image>
+                        </GridLayout>
+                        <GridLayout #btnLike col="3" row="1" class="btn btn-square"
+                            [isUserInteractionEnabled]="i == 0" (tap)="like(card)">
+                            <Image src="~/images/star.png" class="image"></Image>
+                        </GridLayout>
+
+                        <GridLayout col="0" row="2" colSpan="5" rows="auto, auto, auto"
+                            columns="auto, *, auto" class="info">
+                           
+                            <Label col="0" row="1" colSpan="2" [text]="card.title"
+                                textWrap="true" class="h2 title"></Label>
+                
+                        </GridLayout>
+                    </GridLayout>
+                </StackLayout>
+            </SwipeLayout>
+        </android>
+        <ios>
+            <SwipeLayout *ngFor="let card of cards |  slice:0:5; let i = index; trackBy: trackingFunction"
+                [visibility]="isLoaded ? 'visible' : 'collapse'"
+                [animationState]="swipeLayoutAnimated" [gestureMode]="gestureMode"
+                class="swipe-layout" [class.front]="i == 0" [class.middle]="i == 1"
+                [class.back]="i == 2" [isUserInteractionEnabled]="i == 0"
+                (loaded)="swipeLayoutLoaded($event, btnIgnore, btnLike, badgeLike, badgeIgnore)"
+                (swipeLeft)="swipeLeftCallback($event, card)" (swipeRight)="swipeRightCallback($event, card)">
+                <CardView class="main-card dark" shadowOffsetHeight="2"
+                    shadowColor="#000000" shadowOpacity="0.2" shadowRadius="30">
+                    <GridLayout>
+                        <GridLayout rows="*, auto, *" columns="8, auto, *, auto, 8"
+                            class="main-card-container">
+
+                            <GridLayout #badgeLike col="0" colSpan="5" row="0"
+                                class="btn btn-square card-badge m-l-16"
+                                horizontalAlignment="left" opacity="0">
+                                <Image src="~/images/star.png" class="image"></Image>
+                            </GridLayout>
+                            <GridLayout #badgeIgnore col="0" colSpan="5" row="0"
+                                class="btn btn-square card-badge m-r-16"
+                                horizontalAlignment="right" opacity="0">
+                                <Image src="~/images/cancel.png" class="image"></Image>
+                            </GridLayout>
+
+                            <Image col="0" row="0" colSpan="5" rowSpan="6"
+                                [src]="card.image" stretch="aspectFill"></Image>
+
+                            <GridLayout #btnIgnore col="1" row="1" class="btn btn-square"
+                                [isUserInteractionEnabled]="i == 0" (tap)="decline(card)">
+                                <Image src="~/images/cancel.png" class="image"></Image>
+                            </GridLayout>
+                            <GridLayout #btnLike col="3" row="1" class="btn btn-square"
+                                [isUserInteractionEnabled]="i == 0" (tap)="like(card)">
+                                <Image src="~/images/star.png" class="image"></Image>
+                            </GridLayout>
+
+                            <GridLayout col="0" row="2" colSpan="5" rows="auto, auto, auto"
+                                columns="auto, *, auto" class="info">
+                    
+                                <Label col="0" row="1" colSpan="2" [text]="card.title"
+                                    textWrap="true" class="h2 title"></Label>
+                    
+                               
+                            </GridLayout>
+
+                        </GridLayout>
+                    </GridLayout>
+                </CardView>
+            </SwipeLayout>
+        </ios>
+        <StackLayout *ngIf="!cards.length" verticalAlignment="center" [@fade]>
+            <Image src="~/images/empty.png" class="placeholder-image"></Image>
+            <Label text="No more cards to display" textWrap="true" class="h4 placeholder-label"
+                marginBottom="16"></Label>
+            <Button text="Load more" class="btn btn-primary" marginBottom="40"
+                (tap)="resetCards()"></Button>
+        </StackLayout>
+        <ActivityIndicator verticalAlignment="center" [busy]="!isLoaded"
+            class="activity-indicator"></ActivityIndicator>
+    </GridLayout>
+
+    <custom-action-bar row="0" title="Browse works"></custom-action-bar>
+
+</GridLayout>

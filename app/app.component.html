@@ -1,0 +1,60 @@
+<GridLayout columns="*, *, *" rows="*, auto, auto" class="page">
+    <android>
+        <Label col="0" colSpan="3" row="1"></Label>
+        <!-- workaround for Android measuring rows -->
+    </android>
+
+    <TabView col="0" row="0" colSpan="3" rowSpan="2" [(ngModel)]="tabIndex"
+        width="100%" androidTabsPosition="bottom" (loaded)="onTabViewLoaded($event)">
+
+        <page-router-outlet *tabItem="{title: 'Search'}" name="favoritesTab">
+        </page-router-outlet>
+
+        <page-router-outlet *tabItem="{title: 'Home'}" name="homeTab">
+        </page-router-outlet>
+
+        <StackLayout *tabItem="{title: 'Calendar'}" name="calendarTab">
+        </StackLayout>
+
+    </TabView>
+
+
+    <ios>
+        <CardView col="0" row="2" colSpan="3" class="bottom-bar-background"
+            shadowOffsetHeight="2" shadowColor="#000000" shadowOpacity="0.08"
+            shadowRadius="20" verticalAlignment="bottom"></CardView>
+    </ios>
+    <android>
+        <StackLayout col="0" row="2" colSpan="3" class="bottom-bar-background"
+            verticalAlignment="bottom"></StackLayout>
+    </android>
+
+    <GridLayout col="0" row="2" height="48" class="bottom-bar-btn" (tap)="changeTabIndex(0)">
+        <Image [src]="getIconSource('star', 0)" class="image"
+            verticalAlignment="center" (loaded)="onFavIconLoaded($event)"></Image>
+    </GridLayout>
+    <ios>
+        <CardView col="1" row="1" rowSpan="2" class="btn-square btn-cta m-b-20"
+            shadowOffsetHeight="10" shadowColor="#8E51C7" shadowOpacity="0.5"
+            shadowRadius="30" (tap)="changeTabIndex(1)">
+            <GridLayout class="btn-cta-background" [class.active]="tabIndex === 1">
+                <Image [src]="getIconSource('cards', 1)" class="image"></Image>
+            </GridLayout>
+        </CardView>
+    </ios>
+
+    <android>
+        <StackLayout col="1" row="1" rowSpan="2" class="btn-square btn-cta m-b-20 over"
+            (tap)="changeTabIndex(1)">
+            <GridLayout class="btn-cta-background" [class.active]="tabIndex === 1"
+                borderRadius="12">
+                <Image [src]="getIconSource('cards', 1)" class="image"></Image>
+            </GridLayout>
+        </StackLayout>
+    </android>
+
+    <GridLayout col="2" row="2" height="48" class="bottom-bar-btn" (tap)="changeTabIndex(2)">
+        <Image [src]="getIconSource('calendar', 2)" class="image"
+            verticalAlignment="center"></Image>
+    </GridLayout>
+</GridLayout>
