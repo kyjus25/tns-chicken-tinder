@@ -1,4 +1,4 @@
-# 🐔Chicken Tinder
+# Chicken Tinder
 A mobile app for couples designed to ease the pain in choosing what to eat.
 
 ## Development
